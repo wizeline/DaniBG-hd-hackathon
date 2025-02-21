@@ -1,7 +1,25 @@
-import React from 'react';
-import { Image, Text, View, StyleSheet } from 'react-native';
+import React, {useState} from 'react';
+import { Image, Text, View, StyleSheet, FlatList } from 'react-native';
+import GoalInput from "../components/GoalInput";
+import GoalItem from "../components/GoalItem";
 
 function Landing() {
+  const [goalsList, setGoalsList] = useState([]);
+
+  const addGoalHandler = (goalInputText) => {
+    setGoalsList(currentCourseGoals =>  {
+      const newIndex = currentCourseGoals.length + 1;
+      return [
+        ...currentCourseGoals,
+        {text: goalInputText, key: newIndex }]
+    });
+
+  };
+
+  const deleteGoalHandler = (id) => {
+    setGoalsList(currentGoals => [...currentGoals.filter(goal => goal.key !== id)]); //filter returns the previous array MINUS the item(s) that were filtered out - Note: filter internally evaluates a boolean
+  }
+
   return (
     <>
       <View style={styles.imgContainer}>
@@ -12,7 +30,15 @@ function Landing() {
       </View>
       <Text>Add your trip goals and remove them!</Text>
       <View style={styles.costsContainer}>
-        <Text>Lorem ipsum</Text>
+        <GoalInput onAddGoal={addGoalHandler} />
+        <FlatList
+          data={goalsList}
+          renderItem={itemData => {
+            return <GoalItem text={itemData.item.text} id={itemData.item.key} onDeleteItem={deleteGoalHandler}/>
+          }}
+          alwaysBounceVertical={false}
+          //keyExtractor={(item) => item.id.toString()} //This if I were to have id instead of key in .... {text: goalInputText, id: newIndex }]
+        />
       </View>
     </>
   );
@@ -31,7 +57,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   costsContainer: {
-    flex: 1,
+    flex: 4,
     marginTop: 20,
   }
 });
