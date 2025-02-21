@@ -8,5 +8,5 @@ Includes features such as:
 
 * Trip tasks
 * Trip costs
-* Gear up / apparel shopping
+* Gear up / AI powered apparel shopping
 * Social media sharing
