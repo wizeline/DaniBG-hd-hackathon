@@ -12,7 +12,7 @@ import AllExpenses from "./screens/AllExpenses";
 import RouteOverview from "./screens/RouteOverview";
 import { Ionicons } from 'react-native-vector-icons';
 
-const Stack = createNativeStackNavigator(); //gives us access to two things: navigator component and component for registering screens
+const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -25,24 +25,11 @@ export default function App() {
 
   const addGoalHandler = (goalInputText) => {
     setGoalsList(currentCourseGoals =>  {
-      const newIndex = currentCourseGoals.length + 1; //Adding a sequential index based on the array length
+      const newIndex = currentCourseGoals.length + 1;
       return [
       ...currentCourseGoals,
-      {text: goalInputText, key: newIndex }] //FlatList works with this key, so this will work
+      {text: goalInputText, key: newIndex }]
     });
-
-    //Note: setGoalsList(currentCourseGoals => [...currentCourseGoals, goalInputText]); is better than setGoalsList([...goalsList, goalInputText]);
-    //Reason: setGoalsList(currentCourseGoals => [...currentCourseGoals, goalInputText]); uses the functional update form, which ensures that currentCourseGoals always has the latest state, even if multiple state updates happen asynchronously.
-    //Reason n.2 = in "setGoalsList([...goalsList, goalInputText]);" ... if goalsList hasn't been updated yet due to React's asynchronous state updates, this may cause an outdated value to be used.
-    /*
-        Key differences:
-          The "worst" method relies on the state value at render time, which may be stale.
-          The "best" method always gets the most recent state, making it safer in cases where multiple updates might occur in quick succession.
-          *When does this matter?
-          If state updates depend on previous state values (like adding to an array), always use the functional update.
-          If React batches multiple state updates, the first approach may miss some updates.
-    ✅ Rule of thumb: When updating state based on its previous value, always use the functional form. 🚀
-    */
 
   };
 
@@ -85,7 +72,7 @@ export default function App() {
                 } else if (route.name === 'Manage Expense') {
                   iconName = 'create';
                 } else if (route.name === 'My trip') {
-                  iconName = 'suitcase';
+                  iconName = 'wallet';
                 }
 
                 return <Ionicons name={iconName} size={size} color={color} />;
@@ -107,41 +94,12 @@ export default function App() {
 
 const styles = StyleSheet.create({
   appContainer: {
-    flex: 1, // since this is the app container, the parent container, this makes it so that it takes 100% of height space
+    flex: 1,
     paddingTop: 50,
     paddingHorizontal: 16,
   },
   goalsContainer: {
-    flex: 5, // this makes it take 5/6 of the available height space
+    flex: 5,
   },
 
 });
-
-
-/*import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
-
-export default function App() {
-  return (
-      <View style={styles.container}>
-        <Text style={styles.dummyText}>
-          HD Eagle Chain Gang!</Text>
-        <Button title='sample' /> {/!*UNLIKE FOR THE WEB, THIS IS A SELF-CLOSING ELEMENT*!/}
-      </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  dummyText: {
-    margin: 16,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: 'blue',
-  }
-});*/
