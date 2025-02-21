@@ -28,7 +28,7 @@ function Landing() {
           style={styles.lookingAtPhoneImg}
         />
       </View>
-      <Text>Add your trip goals and remove them!</Text>
+      <Text>Create your own to-do list to prepare for the ride!</Text>
       <View style={styles.costsContainer}>
         <GoalInput onAddGoal={addGoalHandler} />
         <FlatList
