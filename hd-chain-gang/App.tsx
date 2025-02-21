@@ -68,7 +68,7 @@ export default function App() {
                 if (route.name === 'Expenses Overview') {
                   iconName = 'wallet';
                 } else if (route.name === 'Apparel') {
-                  iconName = 'create';
+                  iconName = 'cart';
                 } else if (route.name === 'My trip') {
                   iconName = 'map';
                 } else if (route.name === 'Home') {

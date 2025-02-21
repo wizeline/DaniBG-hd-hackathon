@@ -4,13 +4,13 @@ import { Image, Text, View, StyleSheet } from 'react-native';
 function Landing() {
   return (
     <>
-      <View style={styles.mapContainer}>
+      <View style={styles.imgContainer}>
         <Image
           source={require('./../assets/looking_at_phone.jpg')}
           style={styles.lookingAtPhoneImg}
         />
-        <Text>Add your trip goals and remove them!</Text>
       </View>
+      <Text>Add your trip goals and remove them!</Text>
       <View style={styles.costsContainer}>
         <Text>Lorem ipsum</Text>
       </View>
@@ -23,15 +23,15 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  mapContainer: {
-    flex: 7,
+  imgContainer: {
+    flex: 9,
   },
   map: {
     width: '100%',
     height: '100%',
   },
   costsContainer: {
-    flex: 3,
+    flex: 1,
     marginTop: 20,
   }
 });
