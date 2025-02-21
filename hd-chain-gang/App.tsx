@@ -7,6 +7,7 @@ import {Button, StyleSheet, Text, TextInput, View, FlatList} from 'react-native'
 import GoalInput from "./components/GoalInput";
 import GoalItem from "./components/GoalItem";
 import ManageExpense from "./screens/ManageExpense";
+import Landing from "./screens/Landing";
 import RecentExpenses from "./screens/RecentExpenses";
 import AllExpenses from "./screens/AllExpenses";
 import RouteOverview from "./screens/RouteOverview";
@@ -34,9 +35,6 @@ export default function App() {
   };
 
   const deleteGoalHandler = (id) => {
-    //I want to filter the items for which the conditional returns FALSE
-    // Returns TRUE if there is no match, because we want to keep items when there is no match, but if there is a match, if the id exists, this goal.id !== id will return false, because then the ids ARE EQUAL, and then that item will be dropped
-
     setGoalsList(currentGoals => [...currentGoals.filter(goal => goal.key !== id)]); //filter returns the previous array MINUS the item(s) that were filtered out - Note: filter internally evaluates a boolean
   }
 
@@ -69,10 +67,12 @@ export default function App() {
 
                 if (route.name === 'Expenses Overview') {
                   iconName = 'wallet';
-                } else if (route.name === 'Manage Expense') {
+                } else if (route.name === 'Apparel') {
                   iconName = 'create';
                 } else if (route.name === 'My trip') {
-                  iconName = 'wallet';
+                  iconName = 'map';
+                } else if (route.name === 'Home') {
+                  iconName = 'home';
                 }
 
                 return <Ionicons name={iconName} size={size} color={color} />;
@@ -81,8 +81,9 @@ export default function App() {
               tabBarInactiveTintColor: 'gray',
             })}
           >
+            <Tab.Screen name="Home" component={Landing} />
             <Tab.Screen name="Expenses Overview" component={ExpensesOverview} />
-            <Tab.Screen name="Manage Expense" component={ManageExpense} />
+            <Tab.Screen name="Apparel" component={ManageExpense} />
             <Tab.Screen name="My trip" component={RouteOverview} />
           </Tab.Navigator>
         </NavigationContainer>
